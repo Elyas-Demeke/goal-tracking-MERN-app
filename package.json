@@ -8,7 +8,7 @@
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "netlify-postbuild": "npm install && npm run build"
+    "netlify-postbuild": "npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Elyas Demeke",
   "license": "MIT",
