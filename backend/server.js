@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require("express")
 const colors = require('colors')
+const serverless = require('serverless-http')
 const dotenv = require("dotenv").config()
 const {errorHandler} = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
@@ -16,6 +17,7 @@ app.use(express.urlencoded({extended: false}))
 
 app.use('/api/goals', require('./routes/goalRoutes'))
 app.use('/api/users', require('./routes/userRoutes'))
+app.use('/api/rewards', require('./routes/rewardRoutes'))
 
 // Serve frontend
 if(process.env.NODE_ENV === 'production') {
@@ -30,3 +32,6 @@ if(process.env.NODE_ENV === 'production') {
 app.use(errorHandler)
 
 app.listen(port, () => console.log(`server running on port ${port}`))
+
+module.exports = app
+module.exports.handler = serverless(app)
